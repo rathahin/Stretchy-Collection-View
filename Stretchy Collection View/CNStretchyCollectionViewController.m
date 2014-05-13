@@ -17,11 +17,11 @@ static NSString *CellIdentifier = @"Cell";
 {
 	// Register the cell
 	[self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:CellIdentifier];
-
+  
 	// Tweak out the content insets
-	CNStretchyCollectionViewFlowLayout *layout = (CNStretchyCollectionViewFlowLayout *) self.collectionViewLayout;
-	self.collectionView.contentInset = layout.bufferedContentInsets;
-
+  CNStretchyCollectionViewFlowLayout *layout = (CNStretchyCollectionViewFlowLayout *) self.collectionView.collectionViewLayout;
+  self.collectionView.contentInset = layout.bufferedContentInsets;
+  
 	// Set the delegate for the collection view
 	self.collectionView.delegate = self;
 	self.collectionView.clipsToBounds = NO;

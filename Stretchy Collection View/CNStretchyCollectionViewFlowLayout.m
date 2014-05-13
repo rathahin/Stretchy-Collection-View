@@ -92,7 +92,8 @@
 		{
 			CGFloat distanceFromTop = item.center.y - _contentOverflowPadding.top;
 			CGFloat scrollResistance = distanceFromTop / _scrollResistanceDenominator;
-			item.transform = CGAffineTransformMakeTranslation(0, -stretchDelta + (stretchDelta * scrollResistance));
+      CGAffineTransform transform = CGAffineTransformMakeTranslation(0, -stretchDelta + (stretchDelta * scrollResistance));
+      item.transform3D = CATransform3DMakeAffineTransform(transform);
 		}
 
 		// Update the ivar for requiring a reset
@@ -109,7 +110,8 @@
 		{
 			CGFloat distanceFromBottom = collectionViewHeight + _contentOverflowPadding.top - item.center.y;
 			CGFloat scrollResistance = distanceFromBottom / _scrollResistanceDenominator;
-			item.transform = CGAffineTransformMakeTranslation(0, stretchDelta + (-stretchDelta * scrollResistance));
+      CGAffineTransform transform = CGAffineTransformMakeTranslation(0, stretchDelta + (-stretchDelta * scrollResistance));
+      item.transform3D = CATransform3DMakeAffineTransform(transform);
 		}
 
 		// Update the ivar for requiring a reset
@@ -119,8 +121,9 @@
 	{
 		NSLog(@"Resetting transforms");
 		_transformsNeedReset = NO;
-		for (UICollectionViewLayoutAttributes *item in items)
-			item.transform = CGAffineTransformIdentity;
+		for (UICollectionViewLayoutAttributes *item in items) {
+      item.transform3D = CATransform3DIdentity;
+    }
 	}
 
 	return items;
